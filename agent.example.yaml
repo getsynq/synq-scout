@@ -1,0 +1,80 @@
+# Configuration for Coalesce Quality Scout.
+#
+# Every value here is a placeholder. Connection blocks can be generated for you
+# from your workspace at https://app.synq.io/settings/scout, which fills in the
+# connection ids and warehouse coordinates that match what Quality already knows
+# about your estate.
+#
+# ${VAR} is expanded from the environment, so no secret needs to live in this
+# file. Full reference: https://docs.synq.io/scout/cli
+
+# Authenticating as a machine client. Create the credentials under
+# Settings → API in your workspace.
+#
+# For a person rather than a service, skip this block entirely and run
+# `synq-scout auth login` — the browser flow caches a token and takes precedence
+# over nothing, so it is the simpler way to try Scout out.
+synq:
+  client_id: "${QUALITY_CLIENT_ID}"
+  client_secret: "${QUALITY_CLIENT_SECRET}"
+
+# Scout talks to an OpenAI-compatible endpoint. We recommend LiteLLM as the proxy
+# in front of whichever provider you have a contract with, so the model names
+# below are yours to choose.
+llm:
+  openai:
+    base_url: "http://localhost:4000/v1/chat/completions"
+    thinking_model: "claude-sonnet-5"
+    summary_model: "claude-haiku-4-5"
+
+# Warehouses Scout may query directly. Omit this section entirely and Scout still
+# works — it falls back to what your Quality workspace already knows, and only the
+# tools that issue their own queries (column profiling, value sampling) become
+# unavailable.
+#
+# The key of each entry is the connection id from your workspace.
+connections:
+  "00000000-0000-0000-0000-000000000000":
+    name: "Warehouse"
+    disabled: false
+    parallelism: 1
+    snowflake:
+      account: "${SNOWFLAKE_ACCOUNT}"
+      warehouse: "ANALYTICS_WH"
+      role: "QUALITY_ROLE"
+      username: "${SNOWFLAKE_USER}"
+      # A key pair is preferred over a password. Point at the private key file and
+      # supply its passphrase from the environment.
+      private_key_file: "snowflake_key.p8"
+      private_key_passphrase: "${SNOWFLAKE_PRIVATE_KEY_PASSPHRASE}"
+      databases:
+        - ANALYTICS
+
+  # Further examples, one per supported warehouse. Delete what you do not use.
+  #
+  # "00000000-0000-0000-0000-000000000001":
+  #   name: "Postgres"
+  #   parallelism: 1
+  #   postgres:
+  #     host: "${POSTGRES_HOST}"
+  #     port: 5432
+  #     username: "${POSTGRES_USER}"
+  #     password: "${POSTGRES_PASSWORD}"
+  #     database: analytics
+  #
+  # "00000000-0000-0000-0000-000000000002":
+  #   name: "BigQuery"
+  #   parallelism: 1
+  #   bigquery:
+  #     project_id: "${BIGQUERY_PROJECT_ID}"
+  #     region: "${BIGQUERY_REGION}"
+  #     service_account_key: "${BIGQUERY_SERVICE_ACCOUNT_KEY}"
+  #
+  # "00000000-0000-0000-0000-000000000003":
+  #   name: "ClickHouse"
+  #   parallelism: 1
+  #   clickhouse:
+  #     host: "${CLICKHOUSE_HOST}"
+  #     port: 9440
+  #     username: "${CLICKHOUSE_USER}"
+  #     password: "${CLICKHOUSE_PASSWORD}"
