@@ -1,4 +1,8 @@
-# Configuration for Coalesce Quality Scout.
+# yaml-language-server: $schema=https://schemas.synq.io/synq-scout/v1/config.schema.json
+#
+# Configuration for Coalesce Quality Scout. The line above gives an editor
+# completion and validation for every field; the rendered reference is at
+# https://schemas.synq.io/synq-scout/v1/config.html
 #
 # Every value here is a placeholder. Connection blocks can be generated for you
 # from your workspace at https://app.synq.io/settings/scout, which fills in the

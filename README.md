@@ -134,6 +134,10 @@ read-only token yields a read-only tool set.
 
 ## Documentation
 
+- **`AGENTS.md`, shipped beside the binary, is the operating guide** — which
+  surface to pick, the tool loop, the dry-run defaults, output formats, and what each
+  call costs. Written for a coding agent driving Scout; also published at
+  <https://docs.synq.io/scout/agent-workflow>.
 - CLI reference — <https://docs.synq.io/scout/cli>
 - MCP tools and permission tiers — <https://docs.synq.io/scout/mcp>
 - Kubernetes deployment — <https://github.com/getsynq/synq-scout-k8s>
