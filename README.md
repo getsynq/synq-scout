@@ -7,8 +7,8 @@ suggests tests, using your warehouse and your Coalesce Quality workspace. It run
 entirely on infrastructure you control and only ever connects outward, so it can
 sit inside your network with nothing exposed.
 
-This repository is the download channel. The source lives in our monorepo; what
-you find here is the release archives, this guide, and an example configuration.
+This repository is the download channel: the release archives, this guide, and an
+example configuration.
 
 ## Install
 
@@ -187,7 +187,10 @@ read-only token yields a read-only tool set.
 
 ## Support
 
-Questions and problems: <https://docs.synq.io/support/support>.
+Every Coalesce Quality customer has a shared Slack channel with a Technical Account
+Manager. Ask there for anything — getting Scout running, a platform you want
+supported, or something that looks wrong.
+[Support](https://docs.synq.io/support/support) has the details.
 
 ## Licence
 
