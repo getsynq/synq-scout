@@ -12,9 +12,18 @@ you find here is the release archives, this guide, and an example configuration.
 
 ## Install
 
-The archive filename carries the version, so the version has to be resolved
-first. GitHub redirects `/releases/latest` to the newest release's tag, which
-needs no API token and no login:
+On macOS, with Homebrew:
+
+```bash
+brew install getsynq/tap/synq-scout
+```
+
+`brew upgrade synq-scout` from then on. Prefer it on a workstation; a server or
+container should use the image or the Kubernetes manifests below.
+
+Otherwise take the release archive. Its filename carries the version, so the
+version has to be resolved first. GitHub redirects `/releases/latest` to the newest
+release's tag, which needs no API token and no login:
 
 ```bash
 VERSION=$(curl -fsSLI -o /dev/null -w '%{url_effective}' \
@@ -44,8 +53,9 @@ verifies it against the release's `checksums.txt`, and runs the new binary once 
 prove it works on this machine before replacing anything. If the binary lives
 somewhere you cannot write — `/usr/local/bin` usually is not — it says so and
 changes nothing; re-run it with `sudo`. A binary installed by a package manager is
-left to that package manager, and a Kubernetes or Docker deployment should upgrade
-the image rather than the binary inside it.
+left to that package manager — a Homebrew install is upgraded with
+`brew upgrade synq-scout`, which `upgrade` will tell you — and a Kubernetes or
+Docker deployment should upgrade the image rather than the binary inside it.
 
 `synq-scout` also mentions a newer release on stderr, at most once a day. That
 check reads a tag from a public GitHub URL and sends nothing but the tool name and
@@ -59,8 +69,9 @@ switch it off everywhere:
 export QUALITY_NO_UPDATE_CHECK=1     # DO_NOT_TRACK=1 has the same effect
 ```
 
-On macOS a downloaded binary may be quarantined. If it refuses to start,
-`xattr -d com.apple.quarantine /usr/local/bin/synq-scout` clears the flag.
+On macOS a binary downloaded this way may be quarantined. If it refuses to start,
+`xattr -d com.apple.quarantine /usr/local/bin/synq-scout` clears the flag. The
+Homebrew install does this for you.
 
 ### Docker
 
