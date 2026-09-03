@@ -30,6 +30,12 @@ llm:
     base_url: "http://localhost:4000/v1/chat/completions"
     thinking_model: "claude-sonnet-5"
     summary_model: "claude-haiku-4-5"
+    # How long the thinking model deliberates before each answer: none, low,
+    # medium or high — whichever levels your provider names, since the value is
+    # passed through as given. Defaults to low, which is enough for Scout to
+    # form a hypothesis before its first tool call; raising it trades cost for
+    # longer deliberation per step, not for a different capability.
+    thinking_effort: "low"
 
 # Warehouses Scout may query directly. Omit this section entirely and Scout still
 # works — it falls back to what your Quality workspace already knows, and only the
