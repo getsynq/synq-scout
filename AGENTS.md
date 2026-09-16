@@ -186,6 +186,20 @@ fields, with `include_*` arguments to ask for more. Counts and breakdowns are
 pre-computed, so do not make a second call to total something up. Long text is
 truncated with its original size and how to fetch the rest — never silently cut.
 
+**Ids: pass back exactly what you were handed.** A response gives you one
+spelling of each reference, and that spelling is the one every other tool takes.
+Do not trim a prefix, re-case it, or rebuild it out of parts you recognise — an
+id that looks like it is made of a table name and a suffix is still opaque, and a
+reconstructed one usually addresses nothing while looking plausible. Most assets
+are named by `entity_id`, a monitor by `monitor_entity_id`, a segment of one by
+`segment_entity_id`.
+
+Where a tool accepts more than one spelling it says so in `describe`, and it
+reports back the canonical one it resolved to — carry that forward rather than
+the spelling you sent. If a reference does not resolve, you get an error naming
+what was wrong; an empty result means the reference resolved and there was
+nothing there.
+
 ---
 
 ## 7. Warehouse tools need connections; most tools do not
