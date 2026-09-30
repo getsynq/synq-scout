@@ -39,7 +39,24 @@ sudo mv synq-scout /usr/local/bin/
 To pin a version instead, set `VERSION` by hand from the
 [Releases](https://github.com/getsynq/synq-scout/releases) page.
 
-Builds are published for macOS and Linux on both amd64 and arm64.
+Builds are published for macOS, Linux and Windows, each on both amd64 and arm64.
+
+### Windows
+
+Download `synq-scout_<version>_windows_amd64.zip` (or `_arm64`) from the
+[Releases](https://github.com/getsynq/synq-scout/releases) page and extract
+`synq-scout.exe` to a directory on your `PATH`. In PowerShell:
+
+```powershell
+Expand-Archive synq-scout_<version>_windows_amd64.zip -DestinationPath "$env:LOCALAPPDATA\synq-scout"
+$env:Path += ";$env:LOCALAPPDATA\synq-scout"   # this session; add it to your user PATH to keep it
+synq-scout --version
+```
+
+`Get-FileHash -Algorithm SHA256 <archive>` gives the value to compare against
+`checksums.txt`. The browser login keeps its credentials under
+`%USERPROFILE%\.synq\oauth\`, the Windows form of the path described in
+[Sign in](#sign-in).
 
 ### Upgrading
 
@@ -125,6 +142,11 @@ your Quality workspace works. Only the tools that query a warehouse directly —
 column profiling, value sampling — need the `connections` section, and they return
 an explicit "no direct database connections are available" rather than failing when
 it is absent.
+
+DuckDB is the one connection type Scout cannot open. Its builds carry no DuckDB
+driver, on any platform, so a `duckdb` connection fails with "duckdb support not
+available" whenever Scout opens it. Every other warehouse in
+[`agent.example.yaml`](agent.example.yaml) is supported everywhere Scout runs.
 
 Start from [`agent.example.yaml`](agent.example.yaml). The connection blocks can be
 generated for you, already carrying the right connection ids, at
