@@ -158,8 +158,8 @@ backend**. That makes exploring safe, and it makes "I ran the tool and nothing
 changed" the expected outcome rather than a bug.
 
 ```bash
-synq-scout tools set_issue_status --issue-id <id> --status FIXED                 # dropped
-synq-scout tools set_issue_status --issue-id <id> --status FIXED --dry-run=false # applied
+synq-scout tools set_issue_status --issue-ids <id> --status fixed                 # dropped
+synq-scout tools set_issue_status --issue-ids <id> --status fixed --dry-run=false # applied
 ```
 
 The response says so explicitly when a mutation was dropped. `mcp` and `agent`
