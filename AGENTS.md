@@ -74,6 +74,13 @@ you which workspace a mutation will land in. `auth status` shows every stored
 credential across regions, `auth token` prints a fresh access token for scripting,
 `auth logout` removes one.
 
+`synq-scout auth login --coalesce` signs in with your Coalesce account instead;
+add `--organization <org-id>` to skip choosing the organization. That credential
+carries your Coalesce Quality roles in the organization's workspace rather than
+consented permissions, is shared with the other Coalesce Quality CLIs like any
+other login, and is refreshed automatically. `auth status` shows its
+organization and roles.
+
 If your workspace is not in the EU, pass `--region us` (or `au`), or set
 `QUALITY_REGION`. It works on every command, not just `auth`, and a successful
 login is remembered — so later commands need no flag.

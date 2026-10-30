@@ -129,7 +129,8 @@ synq-scout auth whoami   # identity, workspace and granted scopes
 ```
 
 The cache is shared with our other CLIs for the same endpoint, so one login covers
-all of them.
+all of them. To sign in with your Coalesce account instead, run
+`synq-scout auth login --coalesce`.
 
 If your workspace is in North America, add `--region us` (or set
 `QUALITY_REGION=us`). The flag works on every command, not just `auth`.
