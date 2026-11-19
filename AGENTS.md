@@ -119,7 +119,7 @@ synq-scout health
 
 ## 5. Dry run: the default differs per surface
 
-`synq-scout tools` defaults to `--dry-run=true`. Read calls run as normal. A write call returns its expected response, but nothing reaches the backend. So exploring is safe, and "I ran the tool and nothing changed" is the expected result, not a bug.
+`synq-scout tools` defaults to `--dry-run=true`. Read calls run as normal. A write call does not reach the backend, and its response says that nothing was written. So exploring is safe, and "I ran the tool and nothing changed" is the expected result, not a bug.
 
 ```bash
 synq-scout tools set_issue_status --issue-ids <id> --status fixed                 # dropped
